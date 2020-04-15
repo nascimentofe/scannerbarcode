@@ -1,0 +1,5 @@
+package com.example.scannerbarcode.classes;
+
+import com.journeyapps.barcodescanner.CaptureActivity;
+
+public class Portrait extends CaptureActivity {}

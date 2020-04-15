@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ViaExpressa - Scanner</string>
+    <string name="action_settings">Configurações</string>
+    <string name="btn_enviar">Enviar dados</string>
+    <string name="logo_barcode">Logo Barcode</string>
+    <string name="aqui_vai_o_cnpj">Numero do CNPJ:</string>
+    <string name="aqui_vai_o_n_da_nf">Numero da NF-E:</string>
+    <string name="aqui_vai_o_c_digo_de_barras_completo">Digite o código de barras completo:</string>
+    <string name="clique_na_imagem_para_escanear_um_c_digo">Clique na imagem para escanear um código:</string>
+    <string name="logo_via_expressa">Logo Via Expressa</string>
+    <string name="login">LOGIN</string>
+    <string name="senha">SENHA</string>
+    <string name="email">EMAIL</string>
+</resources>

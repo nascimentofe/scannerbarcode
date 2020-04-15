@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".atividade.LoginActivity">
+
+    <LinearLayout
+        android:id="@+id/linLogin1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:gravity="bottom">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:src="@drawable/logo_gray"
+            android:layout_gravity="center"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linLogin2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linLogin1"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+        
+        <EditText
+            android:id="@+id/editLoginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:drawablePadding="20dp"
+            android:background="@drawable/back_edit"
+            android:textColorHint="@color/colorPrimary" />
+
+        <EditText
+            android:id="@+id/editLoginSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_remove_red_eye_black_24dp"
+            android:drawablePadding="20dp"
+            android:background="@drawable/back_edit"
+            android:textColorHint="@color/colorPrimary"
+            android:inputType="textPassword"
+            android:hint="@string/senha" />
+
+        <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/login"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/back_botao"
+            android:textColor="@android:color/white"
+            app:spinning_bar_color="@android:color/white"
+            app:spinning_bar_padding="6dp"
+            app:spinning_bar_width="4dp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Não possui acesso? Entre em contato com a T.I"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
