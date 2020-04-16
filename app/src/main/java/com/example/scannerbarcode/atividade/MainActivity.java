@@ -3,6 +3,7 @@ package com.example.scannerbarcode.atividade;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton imgScan;
     TextInputEditText editNF;
-    Button btnNovoUsuario;
+    Button btnNovoUsuario, btnDeslogar;
     CircularProgressButton btnEnviarDados;
-    ProgressDialog progressDialog;
     MaskEditText editCodigoCompleto, editCNPJ;
     Usuario usuario;
     TextView txtLogadoComo;
+    public static final String LOGIN_PREFERENCE = "LOGIN_AUTOMATICO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +43,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-//        Toast.makeText(this, usuario.getNomeUsuario(), Toast.LENGTH_LONG).show();
 
         views();
 
         acoes();
 
+        salvarLogin();
+    }
+
+    private void salvarLogin() {
+        SharedPreferences.Editor editor = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE).edit();
+        editor.putInt("id", usuario.getIdUsuario());
+        editor.putString("apelido", usuario.getApelidoUsuario());
+        editor.putString("nome", usuario.getNomeUsuario());
+        editor.putString("email", usuario.getEmailUsuario());
+        editor.putString("telefone", usuario.getTelefoneUsuario());
+        editor.putInt("nivel", usuario.getNivelUsuario());
+        editor.putString("tipo", usuario.getTipoUsuario());
+        editor.apply();
+    }
+
+    private void removerLogin(){
+        SharedPreferences.Editor editor = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE).edit();
+        editor.clear().apply();
     }
 
     @Override
@@ -92,25 +110,6 @@ public class MainActivity extends AppCompatActivity {
         integrator.initiateScan();
     }
 
-    public void criarAlert(String result){
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(result);
-        builder.setTitle("Resultado do Scan");
-        builder.setCancelable(true);
-        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                scanow();
-            }
-        });
-        builder.setNegativeButton("Não", null);
-
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
     public void enviarDados(String codigo, String cnpj, String nf){
 
         ArrayList<String> lista = new ArrayList<String>();
@@ -130,19 +129,9 @@ public class MainActivity extends AppCompatActivity {
         editNF.setText("");
     }
 
-    public void abrirProgress(){
-        progressDialog = new ProgressDialog(this);
-        progressDialog.show();
-        progressDialog.setCancelable(false);
-        progressDialog.setContentView(R.layout.progress_dialog);
-        Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
-                android.R.color.transparent
-        );
-    }
-
     public void views(){
         txtLogadoComo = (TextView) findViewById(R.id.txtMainLogadoComo);
-        String txt = txtLogadoComo.getText().toString() + usuario.getNomeUsuario();
+        String txt = usuario.getNomeUsuario();
         txtLogadoComo.setText(txt);
 
         editCNPJ = (MaskEditText) findViewById(R.id.editCNPJ);
@@ -150,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
         editCodigoCompleto = (MaskEditText) findViewById(R.id.editCodigoCompleto);
         btnEnviarDados = (CircularProgressButton) findViewById(R.id.btnEnviarDados);
         btnNovoUsuario = (Button) findViewById(R.id.btnMainNovousuario);
-        btnNovoUsuario.requestFocus();
+        btnDeslogar = (Button) findViewById(R.id.btnMainDeslogar);
+        btnDeslogar.requestFocus();
         imgScan = (ImageButton) findViewById(R.id.imgScan);
     }
 
@@ -205,6 +195,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
+        btnDeslogar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishAffinity();
+                removerLogin();
+                startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+            }
+        });
 
+    }
 }

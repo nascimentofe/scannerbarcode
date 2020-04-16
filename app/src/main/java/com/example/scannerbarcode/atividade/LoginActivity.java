@@ -2,6 +2,8 @@ package com.example.scannerbarcode.atividade;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -16,37 +18,66 @@ import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText editEmail, editSenha;
+    EditText editApelido, editSenha;
     CircularProgressButton progressButton;
     ArrayList<String> lista;
+    public static final String LOGIN_PREFERENCE = "LOGIN_AUTOMATICO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editEmail = (EditText) findViewById(R.id.editLoginEmail);
-        editSenha = (EditText) findViewById(R.id.editLoginSenha);
-        progressButton = (CircularProgressButton) findViewById(R.id.btnLogin);
+        views();
+
+        acoes();
+
+        loginAutomatico();
+    }
+
+    private void loginAutomatico() {
+        SharedPreferences preferences = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE);
+        if (preferences.getInt("id",0) > 0){
+            Usuario usuario = new Usuario(
+                    preferences.getInt("id",0),
+                    preferences.getString("apelido", ""),
+                    preferences.getString("nome", ""),
+                    preferences.getString("email", ""),
+                    preferences.getString("telefone", ""),
+                    preferences.getInt("nivel", 0),
+                    preferences.getString("tipo", "")
+            );
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("usuario", usuario);
+            startActivity(i);
+        }
+    }
+
+    private void acoes() {
         progressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (editEmail.getText().toString().equals("")){
-                    editEmail.setError("E-mail inválido!");
+                if (editApelido.getText().toString().equals("")){
+                    editApelido.setError("Apelido inválido!");
                 }else if(editSenha.getText().toString().equals("")){
                     editSenha.setError("Senha inválida!");
                 }else{
+
                     lista = new ArrayList<>();
-                    lista.add(0, editEmail.getText().toString());
+                    lista.add(0, editApelido.getText().toString());
                     lista.add(1, editSenha.getText().toString());
 
-                    HTTPService request = new HTTPService(getApplicationContext());
                     Usuario usuario = new Usuario();
+                    HTTPService request = new HTTPService(getApplicationContext());
                     request.sendLogin(usuario, lista, progressButton);
                 }
             }
         });
+    }
 
+    private void views() {
+        editApelido = (EditText) findViewById(R.id.editLoginApelido);
+        editSenha = (EditText) findViewById(R.id.editLoginSenha);
+        progressButton = (CircularProgressButton) findViewById(R.id.btnLogin);
     }
 }

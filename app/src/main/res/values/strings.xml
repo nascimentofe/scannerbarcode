@@ -11,4 +11,7 @@
     <string name="login">LOGIN</string>
     <string name="senha">SENHA</string>
     <string name="email">EMAIL</string>
+    <string name="apelido">APELIDO</string>
+    <string name="tipo_de_usuario">TIPO DE USUARIO:</string>
+    <string name="nivel_do_usuario">NIVEL DO USUARIO:</string>
 </resources>

@@ -22,10 +22,10 @@ import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    EditText editNome, editEmail, editSenha, editConfirmSenha;
+    EditText editApelido, editNome, editEmail, editTelefone, editSenha, editConfirmSenha;
     CircularProgressButton btnCadastrar;
     Toolbar toolbar;
-    Spinner spnNivel;
+    Spinner spnNivel, spnTipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +45,14 @@ public class NewUserActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editNome.getText().toString().equals("")){
+                if (editApelido.getText().toString().equals("")){
+                    editApelido.setError("Digite um apelido válido");
+                }else if (editNome.getText().toString().equals("")){
                     editNome.setError("Digite um nome válido");
                 }else if (editEmail.getText().toString().equals("")){
                     editEmail.setError("Digite um email válido");
+                }else if (editTelefone.getText().toString().equals("") || editTelefone.getText().toString().length() < 15){
+                    editTelefone.setError("Digite um telefone válido");
                 }else if(editSenha.getText().toString().equals("")){
                     editSenha.setError("Digite uma senha válida");
                 }else if (editConfirmSenha.getText().toString().equals("")){
@@ -56,33 +60,46 @@ public class NewUserActivity extends AppCompatActivity {
                 }else{
                     if (editSenha.getText().toString().equals(editConfirmSenha.getText().toString())){
                         ArrayList<String> lista = new ArrayList<>();
-                        lista.add(0, editNome.getText().toString());
-                        lista.add(1, editEmail.getText().toString());
-                        lista.add(2, editSenha.getText().toString());
+                        lista.add(0, editApelido.getText().toString());
+                        lista.add(1, editNome.getText().toString());
+                        lista.add(2, editEmail.getText().toString());
+                        lista.add(3, formatarTelefone());
+                        lista.add(4, editSenha.getText().toString());
                         lista.add(
-                                3,
+                                5,
                                 (spnNivel.getSelectedItem().toString().equals("Comum")) ? "0" : "1"
                         );
+                        lista.add(6, spnTipo.getSelectedItem().toString());
 
-                        Log.e("ERRO=>", lista.get(3));
+                        HTTPService request = new HTTPService(getApplicationContext());
+                        request.sendUser(lista, btnCadastrar, view);
 
-//                        HTTPService request = new HTTPService(getApplicationContext());
-//                        request.sendUser(lista, btnCadastrar, view);
                     }else{
                         Snackbar.make(view, "Senhas não conferem!", Snackbar.LENGTH_LONG).show();
                     }
                 }
-
             }
         });
     }
 
+    private String formatarTelefone() {
+        String telefone = editTelefone.getText().toString();
+        telefone = telefone.replace("(", "");
+        telefone = telefone.replace(")", "");
+        telefone = telefone.replace(" ", "");
+        telefone = telefone.replace("-", "");
+        return telefone.trim();
+    }
+
     private void views() {
+        editApelido = (EditText) findViewById(R.id.editNovoUsuarioApelido);
         editNome = (EditText) findViewById(R.id.editUsuarioNome);
         editEmail = (EditText) findViewById(R.id.editUsuarioEmail);
+        editTelefone = (EditText) findViewById(R.id.editNovoUsuarioTelefone);
         editSenha = (EditText) findViewById(R.id.editUsuarioSenha);
         editConfirmSenha = (EditText) findViewById(R.id.editUsuarioConfirmacaoSenha);
         btnCadastrar = (CircularProgressButton) findViewById(R.id.btnNovoUsuarioCadastrar);
+
         spnNivel = (Spinner) findViewById(R.id.spnNovoUsuarioNivel);
         String[] itensNivel = {"Comum", "Admin"};
         spnNivel.setAdapter(new ArrayAdapter<String>(
@@ -90,6 +107,15 @@ public class NewUserActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
                 itensNivel
+        ));
+
+        spnTipo = (Spinner) findViewById(R.id.spnNovoUsuarioTipo);
+        String[] itensTipo = {"Motorista", "Ajudante", "Conferente", "Admin"};
+        spnTipo.setAdapter(new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                itensTipo
         ));
     }
 

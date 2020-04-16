@@ -70,7 +70,7 @@ public class HTTPService {
 
     public void sendLogin(final Usuario usuario, ArrayList<String> lista, final CircularProgressButton progressButton){
 
-        final String url = URL + "/Login.php?email=" + lista.get(0) + "&pass=" + lista.get(1);
+        final String url = URL + "/Login.php?apelido=" + lista.get(0) + "&pass=" + lista.get(1);
 
         progressButton.startAnimation();
 
@@ -82,10 +82,13 @@ public class HTTPService {
                 public void onCompleted(Exception e, JsonObject result) {
                     // do stuff with the result or error
                     if(result != null){
-                        usuario.setEmailUsuario(result.get("EMAIL").getAsString());
                         usuario.setIdUsuario(result.get("ID").getAsInt());
+                        usuario.setApelidoUsuario(result.get("APELIDO").getAsString());
                         usuario.setNomeUsuario(result.get("NOME").getAsString());
+                        usuario.setEmailUsuario(result.get("EMAIL").getAsString());
+                        usuario.setTelefoneUsuario(result.get("TELEFONE").getAsString());
                         usuario.setNivelUsuario(result.get("NIVEL").getAsInt());
+                        usuario.setTipoUsuario(result.get("TIPO").getAsString());
 
                         progressButton.doneLoadingAnimation(
                                 Color.parseColor("#333639"),
@@ -118,10 +121,13 @@ public class HTTPService {
 
         Ion.with(this.context)
                 .load(url)
-                .setBodyParameter("nome", lista.get(0))
-                .setBodyParameter("email", lista.get(1))
-                .setBodyParameter("senha", lista.get(2))
-                .setBodyParameter("nivel", lista.get(3))
+                .setBodyParameter("apelido", lista.get(0))
+                .setBodyParameter("nome", lista.get(1))
+                .setBodyParameter("email", lista.get(2))
+                .setBodyParameter("telefone", lista.get(3))
+                .setBodyParameter("senha", lista.get(4))
+                .setBodyParameter("nivel", lista.get(5))
+                .setBodyParameter("tipo", lista.get(6))
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
                     @Override
@@ -152,7 +158,6 @@ public class HTTPService {
                             );
 
                             Snackbar.make(view, "Usuario inserido com sucesso!", Snackbar.LENGTH_LONG).show();
-
                         }
 
                         Handler handler = new Handler();
