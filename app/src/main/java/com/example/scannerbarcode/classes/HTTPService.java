@@ -143,7 +143,7 @@ public class HTTPService {
                             );
 
                             if (result.get(1).toString().equals("1062")){
-                                erro = "Já existe um usuario cadastrado com este e-mail!";
+                                erro = "Já existe um usuario cadastrado com este apelido!";
                             }else if(result.get(1).toString().equals("1406")){
                                 erro = "Você excedeu o limite de caracteres em algum campo!";
                             }
