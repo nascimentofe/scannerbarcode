@@ -31,4 +31,5 @@ dependencies {
     implementation 'com.github.santalu:mask-edittext:1.0.2'
     implementation 'com.koushikdutta.ion:ion:2.+'
     implementation 'br.com.simplepass:loading-button-android:1.7.2'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 }

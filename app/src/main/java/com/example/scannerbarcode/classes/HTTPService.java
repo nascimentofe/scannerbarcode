@@ -18,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
@@ -168,5 +169,29 @@ public class HTTPService {
                         },  2000);
                     }
                 });
+    }
+
+    public void sendLocation(ArrayList<String> lista){
+
+        final String url = URL +
+                "SendLocation.php?latitude=" + lista.get(0) +
+                "&longitude=" + lista.get(1) +
+                "&id=" + lista.get(2);
+
+        Ion.with(this.context)
+                .load(url)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (result != null){
+                            //deu erro no script php
+                            Log.i("meulog", "Erro no script php");
+                        }else{
+                            Log.i("meulog", "localização enviada!");
+                        }
+                    }
+                });
+
     }
 }

@@ -1,9 +1,12 @@
 package com.example.scannerbarcode.atividade;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.scannerbarcode.classes.HTTPService;
+import com.example.scannerbarcode.classes.LocationService;
 import com.example.scannerbarcode.classes.Portrait;
 import com.example.scannerbarcode.R;
 import com.example.scannerbarcode.classes.Usuario;
@@ -18,6 +22,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.santalu.maskedittext.MaskEditText;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +55,25 @@ public class MainActivity extends AppCompatActivity {
         acoes();
 
         salvarLogin();
+
+    }
+
+    private void buscarLocalizacao() {
+        if (Build.VERSION.SDK_INT >= 23){
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+            }else{
+                startService();
+            }
+        }else{
+            startService();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        buscarLocalizacao();
     }
 
     private void salvarLogin() {
@@ -82,6 +107,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }else{
             super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case 44:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    startService();
+                }else{
+                    Toast.makeText(this, "Permissões são necessarias!", Toast.LENGTH_LONG).show();
+                }
         }
     }
 
@@ -204,5 +242,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void startService(){
+        Intent i = new Intent(MainActivity.this, LocationService.class);
+        i.putExtra("usuario", usuario);
+        startService(i);
     }
 }
