@@ -3,6 +3,7 @@ package com.example.scannerbarcode.classes;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
@@ -66,8 +67,8 @@ public class LocationService extends Service {
 
     private void requestLocation(){
         LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(120000);
-        mLocationRequest.setFastestInterval(60000);
+        mLocationRequest.setInterval(90000);
+        mLocationRequest.setFastestInterval(50000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
     }

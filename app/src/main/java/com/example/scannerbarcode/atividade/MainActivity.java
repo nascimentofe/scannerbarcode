@@ -1,13 +1,15 @@
 package com.example.scannerbarcode.atividade;
 
 import android.Manifest;
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,6 +20,8 @@ import com.example.scannerbarcode.classes.LocationService;
 import com.example.scannerbarcode.classes.Portrait;
 import com.example.scannerbarcode.R;
 import com.example.scannerbarcode.classes.Usuario;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -25,10 +29,8 @@ import com.santalu.maskedittext.MaskEditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
@@ -58,39 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void buscarLocalizacao() {
-        if (Build.VERSION.SDK_INT >= 23){
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-            }else{
-                startService();
-            }
-        }else{
-            startService();
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        buscarLocalizacao();
-    }
 
-    private void salvarLogin() {
-        SharedPreferences.Editor editor = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE).edit();
-        editor.putInt("id", usuario.getIdUsuario());
-        editor.putString("apelido", usuario.getApelidoUsuario());
-        editor.putString("nome", usuario.getNomeUsuario());
-        editor.putString("email", usuario.getEmailUsuario());
-        editor.putString("telefone", usuario.getTelefoneUsuario());
-        editor.putInt("nivel", usuario.getNivelUsuario());
-        editor.putString("tipo", usuario.getTipoUsuario());
-        editor.apply();
-    }
-
-    private void removerLogin(){
-        SharedPreferences.Editor editor = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE).edit();
-        editor.clear().apply();
+        if (verificarPlayServices()){
+            if (verificarGps()){
+                buscarLocalizacao();
+            }
+        }
     }
 
     @Override
@@ -128,6 +106,63 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         //tem certeza que deseja se deslogar?
         finishAffinity();
+    }
+
+    private boolean verificarGps() {
+        LocationManager mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if(mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            return true;
+        }else{
+            Intent gpsSettings = new Intent(
+                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(gpsSettings);
+            return false;
+        }
+    }
+
+    private boolean verificarPlayServices() {
+        int errorCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
+        if (errorCode == ConnectionResult.SUCCESS){
+            return true;
+        }else{
+            GoogleApiAvailability.getInstance().getErrorDialog(this, errorCode, 0,
+                    new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialogInterface) {
+                            finish();
+                        }
+                    }).show();
+            return false;
+        }
+    }
+
+    private void buscarLocalizacao() {
+        if (Build.VERSION.SDK_INT >= 23){
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+            }else{
+                startService();
+            }
+        }else{
+            startService();
+        }
+    }
+
+    private void salvarLogin() {
+        SharedPreferences.Editor editor = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE).edit();
+        editor.putInt("id", usuario.getIdUsuario());
+        editor.putString("apelido", usuario.getApelidoUsuario());
+        editor.putString("nome", usuario.getNomeUsuario());
+        editor.putString("email", usuario.getEmailUsuario());
+        editor.putString("telefone", usuario.getTelefoneUsuario());
+        editor.putInt("nivel", usuario.getNivelUsuario());
+        editor.putString("tipo", usuario.getTipoUsuario());
+        editor.apply();
+    }
+
+    private void removerLogin(){
+        SharedPreferences.Editor editor = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE).edit();
+        editor.clear().apply();
     }
 
     public void preencherCampos(String result){
