@@ -1,6 +1,5 @@
 package com.example.scannerbarcode.classes;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -18,7 +17,6 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
@@ -69,11 +67,12 @@ public class HTTPService {
             });
     }
 
-    public void sendLogin(final Usuario usuario, ArrayList<String> lista, final CircularProgressButton progressButton){
+    public void sendLogin(ArrayList<String> lista, final CircularProgressButton progressButton){
 
         final String url = URL + "/Login.php?apelido=" + lista.get(0) + "&pass=" + lista.get(1);
 
         progressButton.startAnimation();
+        final Usuario usuario = new Usuario();
 
         Ion.with(this.context)
             .load(url)
@@ -85,6 +84,7 @@ public class HTTPService {
                     if(result != null){
                         usuario.setIdUsuario(result.get("ID").getAsInt());
                         usuario.setApelidoUsuario(result.get("APELIDO").getAsString());
+                        usuario.setSenhaUsuario(result.get("SENHA").getAsString());
                         usuario.setNomeUsuario(result.get("NOME").getAsString());
                         usuario.setEmailUsuario(result.get("EMAIL").getAsString());
                         usuario.setTelefoneUsuario(result.get("TELEFONE").getAsString());
@@ -107,7 +107,7 @@ public class HTTPService {
                         },  1000);
 
                     }else{
-                        Toast.makeText(context, "Email ou senha incorretos!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Apelido ou senha incorretos!", Toast.LENGTH_LONG).show();
                         progressButton.revertAnimation();
                     }
                 }
@@ -193,5 +193,28 @@ public class HTTPService {
                     }
                 });
 
+    }
+
+    public void checkLogin(final Usuario usuario, final CircularProgressButton progressButton){
+
+        final String url = URL + "/checkLogin.php?apelido=" + usuario.getApelidoUsuario() + "&pass=" + usuario.getSenhaUsuario();
+        Toast.makeText(context, "Verificando login...", Toast.LENGTH_LONG).show();
+
+        Ion.with(context)
+                .load(url)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (result != null){
+                            Intent i = new Intent(context.getApplicationContext(), MainActivity.class);
+                            i.putExtra("usuario", usuario);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(i);
+                        }else{
+                            Toast.makeText(context, "Faça um novo login!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 }

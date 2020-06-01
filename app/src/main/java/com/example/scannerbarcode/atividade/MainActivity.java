@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE).edit();
         editor.putInt("id", usuario.getIdUsuario());
         editor.putString("apelido", usuario.getApelidoUsuario());
+        editor.putString("senha", usuario.getSenhaUsuario());
         editor.putString("nome", usuario.getNomeUsuario());
         editor.putString("email", usuario.getEmailUsuario());
         editor.putString("telefone", usuario.getTelefoneUsuario());

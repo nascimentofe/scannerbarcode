@@ -31,6 +31,11 @@ public class LoginActivity extends AppCompatActivity {
         views();
 
         acoes();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         loginAutomatico();
     }
@@ -41,15 +46,16 @@ public class LoginActivity extends AppCompatActivity {
             Usuario usuario = new Usuario(
                     preferences.getInt("id",0),
                     preferences.getString("apelido", ""),
+                    preferences.getString("senha", ""),
                     preferences.getString("nome", ""),
                     preferences.getString("email", ""),
                     preferences.getString("telefone", ""),
                     preferences.getInt("nivel", 0),
                     preferences.getString("tipo", "")
             );
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            i.putExtra("usuario", usuario);
-            startActivity(i);
+
+            HTTPService request = new HTTPService(getApplicationContext());
+            request.checkLogin(usuario, progressButton);
         }
     }
 
@@ -62,14 +68,12 @@ public class LoginActivity extends AppCompatActivity {
                 }else if(editSenha.getText().toString().equals("")){
                     editSenha.setError("Senha inválida!");
                 }else{
-
                     lista = new ArrayList<>();
                     lista.add(0, editApelido.getText().toString());
                     lista.add(1, editSenha.getText().toString());
 
-                    Usuario usuario = new Usuario();
                     HTTPService request = new HTTPService(getApplicationContext());
-                    request.sendLogin(usuario, lista, progressButton);
+                    request.sendLogin(lista, progressButton);
                 }
             }
         });

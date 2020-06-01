@@ -6,6 +6,7 @@ public class Usuario implements Serializable {
 
     private int idUsuario;
     private String apelidoUsuario;
+    private String senhaUsuario;
     private String nomeUsuario;
     private String emailUsuario;
     private String telefoneUsuario;
@@ -15,9 +16,10 @@ public class Usuario implements Serializable {
     public Usuario(){
     }
 
-    public Usuario(int idUsuario, String apelidoUsuario, String nomeUsuario, String emailUsuario, String telefoneUsuario, int nivelUsuario, String tipoUsuario) {
+    public Usuario(int idUsuario, String apelidoUsuario, String senhaUsuario, String nomeUsuario, String emailUsuario, String telefoneUsuario, int nivelUsuario, String tipoUsuario) {
         this.idUsuario = idUsuario;
         this.apelidoUsuario = apelidoUsuario;
+        this.senhaUsuario = senhaUsuario;
         this.nomeUsuario = nomeUsuario;
         this.emailUsuario = emailUsuario;
         this.telefoneUsuario = telefoneUsuario;
@@ -79,5 +81,13 @@ public class Usuario implements Serializable {
 
     void setNivelUsuario(int nivelUsuario) {
         this.nivelUsuario = nivelUsuario;
+    }
+
+    public String getSenhaUsuario() {
+        return senhaUsuario;
+    }
+
+    public void setSenhaUsuario(String senhaUsuario) {
+        this.senhaUsuario = senhaUsuario;
     }
 }
