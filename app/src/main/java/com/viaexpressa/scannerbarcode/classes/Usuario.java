@@ -1,4 +1,4 @@
-package com.example.scannerbarcode.classes;
+package com.viaexpressa.scannerbarcode.classes;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.example.scannerbarcode.atividade;
+package com.viaexpressa.scannerbarcode.atividade;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.example.scannerbarcode.R;
+import com.viaexpressa.scannerbarcode.R;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.scannerbarcode;
+package com.viaexpressa.scannerbarcode;
 
 import android.content.Context;
 

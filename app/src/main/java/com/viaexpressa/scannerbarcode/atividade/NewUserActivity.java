@@ -1,19 +1,17 @@
-package com.example.scannerbarcode.atividade;
+package com.viaexpressa.scannerbarcode.atividade;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.scannerbarcode.R;
-import com.example.scannerbarcode.classes.HTTPService;
+import com.viaexpressa.scannerbarcode.R;
+import com.viaexpressa.scannerbarcode.classes.HTTPService;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.scannerbarcode.atividade;
+package com.viaexpressa.scannerbarcode.atividade;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,17 +9,16 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.scannerbarcode.classes.HTTPService;
-import com.example.scannerbarcode.classes.LocationService;
-import com.example.scannerbarcode.classes.Portrait;
-import com.example.scannerbarcode.R;
-import com.example.scannerbarcode.classes.Usuario;
+import com.viaexpressa.scannerbarcode.classes.HTTPService;
+import com.viaexpressa.scannerbarcode.classes.LocationService;
+import com.viaexpressa.scannerbarcode.classes.Portrait;
+import com.viaexpressa.scannerbarcode.R;
+import com.viaexpressa.scannerbarcode.classes.Usuario;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.material.textfield.TextInputEditText;

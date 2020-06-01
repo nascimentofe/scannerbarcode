@@ -1,16 +1,15 @@
-package com.example.scannerbarcode.atividade;
+package com.viaexpressa.scannerbarcode.atividade;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.scannerbarcode.R;
-import com.example.scannerbarcode.classes.HTTPService;
-import com.example.scannerbarcode.classes.Usuario;
+import com.viaexpressa.scannerbarcode.R;
+import com.viaexpressa.scannerbarcode.classes.HTTPService;
+import com.viaexpressa.scannerbarcode.classes.Usuario;
 
 import java.util.ArrayList;
 

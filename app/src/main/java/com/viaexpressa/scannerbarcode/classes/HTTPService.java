@@ -1,4 +1,4 @@
-package com.example.scannerbarcode.classes;
+package com.viaexpressa.scannerbarcode.classes;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.scannerbarcode.R;
-import com.example.scannerbarcode.atividade.MainActivity;
+import com.viaexpressa.scannerbarcode.R;
+import com.viaexpressa.scannerbarcode.atividade.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -24,7 +24,7 @@ import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 public class HTTPService {
 
     private Context context;
-    private static final String URL = "https://viaexpressa.000webhostapp.com/appviaexpressa/";
+    private static final String URL = "https://viaexpressaapp.com/appscanner/appviaexpressa/";
 
     public HTTPService(Context context){
         this.context = context;
@@ -35,7 +35,7 @@ public class HTTPService {
         progressButton.startAnimation();
 
         final String url = URL +
-                "index.php?codigo_barras=" + lista.get(0) +
+                "SendData.php?codigo_barras=" + lista.get(0) +
                 "&cnpj=" + lista.get(1) +
                 "&nota=" + lista.get(2) +
                 "&id=" + lista.get(3);
