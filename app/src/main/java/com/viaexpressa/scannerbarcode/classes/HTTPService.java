@@ -217,4 +217,22 @@ public class HTTPService {
                     }
                 });
     }
+
+    public ArrayList<Long> getTimeoutLocation(){
+
+        final String url = URL + "/getTimeoutLocation.php";
+        final ArrayList<Long> interval = new ArrayList<>();
+
+        Ion.with(context)
+                .load(url)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        interval.add(0, result.get("interval").getAsLong());
+                        interval.add(1, result.get("fatest").getAsLong());
+                    }
+                });
+        return interval;
+    }
 }
