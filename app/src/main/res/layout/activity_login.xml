@@ -56,15 +56,16 @@
                 android:background="@drawable/back_left_round"
                 android:textColorHint="@color/colorPrimary"
                 android:inputType="textPassword"
-                android:hint="@string/senha" />
+                android:hint="@string/senha"
+                />
 
             <ImageButton
+                android:id="@+id/imgBtnExibirSenha"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/h_edit_login"
                 android:src="@android:drawable/ic_menu_edit"
-                android:background="@drawable/back_right_round"
-                android:text="Clique" />
+                android:background="@drawable/back_right_round"/>
         </LinearLayout>
 
 

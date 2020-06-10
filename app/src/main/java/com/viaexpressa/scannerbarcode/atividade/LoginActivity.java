@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.viaexpressa.scannerbarcode.R;
 import com.viaexpressa.scannerbarcode.classes.HTTPService;
@@ -20,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText editApelido, editSenha;
     CircularProgressButton progressButton;
     ArrayList<String> lista;
+    ImageButton imgBtnExibirSenha;
     public static final String LOGIN_PREFERENCE = "LOGIN_AUTOMATICO";
 
     @Override
@@ -76,11 +80,23 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        imgBtnExibirSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editSenha.getTransformationMethod().toString()
+                        .equals("android.text.method.PasswordTransformationMethod@c9b1dfa")){
+                    editSenha.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+                    editSenha.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
     }
 
     private void views() {
         editApelido = (EditText) findViewById(R.id.editLoginApelido);
         editSenha = (EditText) findViewById(R.id.editLoginSenha);
         progressButton = (CircularProgressButton) findViewById(R.id.btnLogin);
+        imgBtnExibirSenha = (ImageButton) findViewById(R.id.imgBtnExibirSenha);
     }
 }
