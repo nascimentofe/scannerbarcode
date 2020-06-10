@@ -29,28 +29,44 @@
         android:layout_marginTop="60dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
-        
+
         <EditText
             android:id="@+id/editLoginApelido"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/h_edit_login"
             android:hint="@string/apelido"
             android:drawableStart="@drawable/ic_person_black_24dp"
             android:drawablePadding="20dp"
-            android:background="@drawable/back_edit"
+            android:background="@drawable/back_full_round"
             android:textColorHint="@color/colorPrimary" />
 
-        <EditText
-            android:id="@+id/editLoginSenha"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:drawableStart="@drawable/ic_remove_red_eye_black_24dp"
-            android:drawablePadding="20dp"
-            android:background="@drawable/back_edit"
-            android:textColorHint="@color/colorPrimary"
-            android:inputType="textPassword"
-            android:hint="@string/senha" />
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:layout_weight="100"
+                android:id="@+id/editLoginSenha"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/h_edit_login"
+                android:drawableStart="@drawable/ic_remove_red_eye_black_24dp"
+                android:drawablePadding="20dp"
+                android:background="@drawable/back_left_round"
+                android:textColorHint="@color/colorPrimary"
+                android:inputType="textPassword"
+                android:hint="@string/senha" />
+
+            <ImageButton
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/h_edit_login"
+                android:src="@android:drawable/ic_menu_edit"
+                android:background="@drawable/back_right_round"
+                android:text="Clique" />
+        </LinearLayout>
+
 
         <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
             android:id="@+id/btnLogin"
