@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -83,11 +85,10 @@ public class LoginActivity extends AppCompatActivity {
         imgBtnExibirSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editSenha.getTransformationMethod().toString()
-                        .equals("android.text.method.PasswordTransformationMethod@c9b1dfa")){
-                    editSenha.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                if (editSenha.getInputType() == 129){ // password type
+                    editSenha.setInputType(131073); // text type
                 }else{
-                    editSenha.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    editSenha.setInputType(129);
                 }
             }
         });

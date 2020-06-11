@@ -64,7 +64,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/h_edit_login"
-                android:src="@android:drawable/ic_menu_edit"
+                android:src="@drawable/ic_baseline_edit_24"
                 android:background="@drawable/back_right_round"/>
         </LinearLayout>
 
