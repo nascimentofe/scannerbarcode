@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 if (result.getContents().replace(" ", "").length() == 44){
                     preencherCampos(result.getContents());
+                    prepararEnvio();
                 }
             }
         }else{
@@ -229,31 +230,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String codigo = editCodigoCompleto.getText().toString().replace(" ", "");
-                String cnpj = editCNPJ.getText().toString().replace(".", "").replace("-", "").replace("/", "");
-                String nf = editNF.getText().toString();
+                prepararEnvio();
 
-                if (codigo.length() == 44 && !cnpj.equals("") && !nf.equals("")){
-                    //enviar
-                    enviarDados(codigo, cnpj, nf);
-                    limparCampos();
-                }else{
-                    if (codigo.length() == 44){
-                        if (codigo.substring(20, 22).equals("55")){
-                            preencherCampos(codigo);
-                            //enviar
-                            enviarDados(codigo,
-                                    editCNPJ.getText().toString().replace(".", "").replace("-", "").replace("/", ""),
-                                    editNF.getText().toString());
-                            limparCampos();
-                        }else{
-                            Toast.makeText(getApplicationContext(), "Código de barras inválido!", Toast.LENGTH_LONG).show();
-                        }
-                    }else{
-                        int diff = 44 - codigo.length();
-                        Toast.makeText(getApplicationContext(), "Faltam " + diff + " dígitos para completar o código!", Toast.LENGTH_LONG).show();
-                    }
-                }
             }
         });
 
@@ -277,6 +255,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void prepararEnvio() {
+        String codigo = editCodigoCompleto.getText().toString().replace(" ", "");
+        String cnpj = editCNPJ.getText().toString().replace(".", "").replace("-", "").replace("/", "");
+        String nf = editNF.getText().toString();
+
+        if (codigo.length() == 44 && !cnpj.equals("") && !nf.equals("")){
+            //enviar
+            enviarDados(codigo, cnpj, nf);
+            limparCampos();
+        }else{
+            if (codigo.length() == 44){
+                if (codigo.substring(20, 22).equals("55")){
+                    preencherCampos(codigo);
+                    //enviar
+                    enviarDados(codigo,
+                            editCNPJ.getText().toString().replace(".", "").replace("-", "").replace("/", ""),
+                            editNF.getText().toString());
+                    limparCampos();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Código de barras inválido!", Toast.LENGTH_LONG).show();
+                }
+            }else{
+                int diff = 44 - codigo.length();
+                Toast.makeText(getApplicationContext(), "Faltam " + diff + " dígitos para completar o código!", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void startService(){

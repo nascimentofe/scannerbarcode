@@ -198,7 +198,7 @@ public class HTTPService {
     public void checkLogin(final Usuario usuario, final CircularProgressButton progressButton){
 
         final String url = URL + "/checkLogin.php?apelido=" + usuario.getApelidoUsuario() + "&pass=" + usuario.getSenhaUsuario();
-        Toast.makeText(context, "Verificando login...", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Verificando login...", Toast.LENGTH_SHORT).show();
 
         Ion.with(context)
                 .load(url)
