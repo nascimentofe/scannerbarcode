@@ -1,4 +1,4 @@
-package com.viaexpressa.scannerbarcode.atividade;
+package com.viaexpressa.scannerbarcode.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.viaexpressa.scannerbarcode.R;
-import com.viaexpressa.scannerbarcode.classes.HTTPService;
+import com.viaexpressa.scannerbarcode.services.HTTPService;
 import com.viaexpressa.scannerbarcode.classes.Usuario;
 
 public class ListNotesActivity extends AppCompatActivity {

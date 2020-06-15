@@ -1,4 +1,4 @@
-package com.viaexpressa.scannerbarcode.atividade;
+package com.viaexpressa.scannerbarcode.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

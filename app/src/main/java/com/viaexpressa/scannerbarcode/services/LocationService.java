@@ -1,4 +1,4 @@
-package com.viaexpressa.scannerbarcode.classes;
+package com.viaexpressa.scannerbarcode.services;
 
 import android.Manifest;
 import android.app.Service;
@@ -18,6 +18,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.viaexpressa.scannerbarcode.classes.Usuario;
 
 import java.util.ArrayList;
 

@@ -1,19 +1,15 @@
-package com.viaexpressa.scannerbarcode.atividade;
+package com.viaexpressa.scannerbarcode.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.viaexpressa.scannerbarcode.R;
-import com.viaexpressa.scannerbarcode.classes.HTTPService;
+import com.viaexpressa.scannerbarcode.services.HTTPService;
 import com.viaexpressa.scannerbarcode.classes.Usuario;
 
 import java.util.ArrayList;

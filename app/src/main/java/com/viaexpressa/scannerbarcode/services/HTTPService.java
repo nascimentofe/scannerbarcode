@@ -1,4 +1,4 @@
-package com.viaexpressa.scannerbarcode.classes;
+package com.viaexpressa.scannerbarcode.services;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.viaexpressa.scannerbarcode.R;
 import com.viaexpressa.scannerbarcode.adapter.RecyclerNoteListAdapter;
-import com.viaexpressa.scannerbarcode.atividade.MainActivity;
+import com.viaexpressa.scannerbarcode.activity.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.viaexpressa.scannerbarcode.classes.Nota;
+import com.viaexpressa.scannerbarcode.classes.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
