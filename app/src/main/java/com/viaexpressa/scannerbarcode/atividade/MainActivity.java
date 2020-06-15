@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ListNotesActivity.class);
-                i.putExtra("id", usuario.getIdUsuario());
+                i.putExtra("usuario", usuario);
                 startActivity(i);
             }
         });

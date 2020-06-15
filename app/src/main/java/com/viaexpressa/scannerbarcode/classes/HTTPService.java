@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.viaexpressa.scannerbarcode.R;
 import com.viaexpressa.scannerbarcode.atividade.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
@@ -234,5 +237,21 @@ public class HTTPService {
                     }
                 });
         return interval;
+    }
+
+    public void listarNotas(final RecyclerView recyclerView, int idUsuario){
+
+        String url = URL + "getNotas.php?id=" + idUsuario;
+
+        Ion.with(context)
+                .load(url)
+                .asJsonArray()
+                .setCallback(new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
+
+
+                    }
+                });
     }
 }
