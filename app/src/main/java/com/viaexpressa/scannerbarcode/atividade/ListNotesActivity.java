@@ -20,6 +20,7 @@ public class ListNotesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_notes);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Notas escaneadas");
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 

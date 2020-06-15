@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linLayoutItemNota"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_marginTop="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:elevation="20dp">
+
+    <ImageView
+        android:id="@+id/imgItemViewNota"
+        android:layout_width="67dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_baseline_list_alt_24" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="10dp"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/txtItemNotaNumNota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Nota: " />
+        <TextView
+            android:id="@+id/txtItemNotaHoraData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Hora: " />
+        <TextView
+            android:id="@+id/txtItemNotaCnpjNota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="CNPJ: " />
+    </LinearLayout>
+
+
+</LinearLayout>

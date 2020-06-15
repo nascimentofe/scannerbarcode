@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.viaexpressa.scannerbarcode.R;
+import com.viaexpressa.scannerbarcode.adapter.RecyclerNoteListAdapter;
 import com.viaexpressa.scannerbarcode.atividade.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonArray;
@@ -21,6 +22,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
@@ -243,6 +245,8 @@ public class HTTPService {
 
         String url = URL + "getNotas.php?id=" + idUsuario;
 
+
+
         Ion.with(context)
                 .load(url)
                 .asJsonArray()
@@ -250,7 +254,26 @@ public class HTTPService {
                     @Override
                     public void onCompleted(Exception e, JsonArray result) {
 
+                        JsonObject jsonObject;
+                        List<Nota> notaList = new ArrayList<>();
 
+                        for(int i=0; i < result.size(); i++){
+
+                            jsonObject = result.get(i).getAsJsonObject();
+
+                            Nota nota = new Nota(
+                                    jsonObject.get("CNPJ").getAsString(),
+                                    jsonObject.get("DATA_HORA").getAsString(),
+                                    jsonObject.get("NUM_NF").getAsString(),
+                                    R.drawable.ic_baseline_list_alt_24
+                            );
+                            notaList.add(nota);
+                        }
+
+                        // adapter
+                        RecyclerNoteListAdapter adapter = new RecyclerNoteListAdapter(context, notaList);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        recyclerView.setAdapter(adapter);
                     }
                 });
     }
