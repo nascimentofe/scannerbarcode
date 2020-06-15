@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton imgScan;
     TextInputEditText editNF;
-    Button btnNovoUsuario, btnDeslogar;
+    Button btnNovoUsuario, btnDeslogar, btnListaNotas;
     CircularProgressButton btnEnviarDados;
     MaskEditText editCodigoCompleto, editCNPJ;
     Usuario usuario;
@@ -204,13 +204,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void views(){
         txtLogadoComo = (TextView) findViewById(R.id.txtMainLogadoComo);
-        String txt = usuario.getNomeUsuario();
-        txtLogadoComo.setText(txt);
+        txtLogadoComo.setText(usuario.getNomeUsuario());
 
         editCNPJ = (MaskEditText) findViewById(R.id.editCNPJ);
         editNF = (TextInputEditText) findViewById(R.id.editNF);
         editCodigoCompleto = (MaskEditText) findViewById(R.id.editCodigoCompleto);
         btnEnviarDados = (CircularProgressButton) findViewById(R.id.btnEnviarDados);
+        btnListaNotas = (Button) findViewById(R.id.btnMainListNotes);
         btnNovoUsuario = (Button) findViewById(R.id.btnMainNovousuario);
         btnDeslogar = (Button) findViewById(R.id.btnMainDeslogar);
         btnDeslogar.requestFocus();
@@ -254,6 +254,15 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Faltam " + diff + " dígitos para completar o código!", Toast.LENGTH_LONG).show();
                     }
                 }
+            }
+        });
+
+        btnListaNotas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ListNotesActivity.class);
+                i.putExtra("id", usuario.getIdUsuario());
+                startActivity(i);
             }
         });
 

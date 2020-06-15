@@ -49,12 +49,20 @@
         android:layout_marginTop="5dp">
 
         <Button
+            android:id="@+id/btnMainListNotes"
+            android:layout_width="60dp"
+            android:layout_height="32dp"
+            android:drawableBottom="@drawable/ic_baseline_list_alt_24"
+            android:background="@drawable/back_botao"
+            android:layout_marginEnd="10dp" />
+
+        <Button
             android:id="@+id/btnMainNovousuario"
             android:layout_width="60dp"
             android:layout_height="32dp"
             android:drawableBottom="@drawable/ic_person_add_black_24dp"
             android:background="@drawable/back_botao"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginEnd="10dp"/>
 
         <Button
             android:id="@+id/btnMainDeslogar"
