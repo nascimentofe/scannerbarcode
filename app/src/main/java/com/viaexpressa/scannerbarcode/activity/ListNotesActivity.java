@@ -1,6 +1,7 @@
 package com.viaexpressa.scannerbarcode.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -14,13 +15,15 @@ public class ListNotesActivity extends AppCompatActivity {
 
     Usuario usuario;
     RecyclerView recyclerView;
+    androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_notes);
+        toolbar = (Toolbar) findViewById(R.id.toolbarListNotes);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Notas escaneadas");
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 

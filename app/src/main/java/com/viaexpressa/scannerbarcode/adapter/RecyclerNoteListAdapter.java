@@ -1,6 +1,7 @@
 package com.viaexpressa.scannerbarcode.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.viaexpressa.scannerbarcode.R;
 import com.viaexpressa.scannerbarcode.classes.Nota;
 
+
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class RecyclerNoteListAdapter extends RecyclerView.Adapter<RecyclerNoteListAdapter.MyViewHolder>{
@@ -52,7 +56,7 @@ public class RecyclerNoteListAdapter extends RecyclerView.Adapter<RecyclerNoteLi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txtNumNota.setText(holder.txtNumNota.getText() + mData.get(position).getNumNota());
-        holder.txtDataHora.setText(holder.txtDataHora.getText() + mData.get(position).getDataHora());
+        holder.txtDataHora.setText(holder.txtDataHora.getText() + formatarData(mData.get(position).getDataHora()));
         holder.txtCnpj.setText(holder.txtCnpj.getText() + mData.get(position).getCnpj());
         Glide.with(mContext).load(mData.get(position).getCaminhoImagemNota()).apply(requestOptions).into(holder.imgItemNota);
     }
@@ -60,6 +64,14 @@ public class RecyclerNoteListAdapter extends RecyclerView.Adapter<RecyclerNoteLi
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public String formatarData(String data){
+        //2020-05-30 12:15:00
+        String[] dt = data.split(" ");
+        List<String> lista = Arrays.asList(dt[0].split("-"));
+        Collections.reverse(lista);
+        return TextUtils.join("/", lista) + " ás " + dt[1];
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
