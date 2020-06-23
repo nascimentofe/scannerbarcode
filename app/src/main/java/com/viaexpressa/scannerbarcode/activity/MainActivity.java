@@ -1,4 +1,4 @@
-package com.viaexpressa.scannerbarcode.atividade;
+package com.viaexpressa.scannerbarcode.activity;
 
 import android.Manifest;
 import android.content.Context;
@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.viaexpressa.scannerbarcode.classes.HTTPService;
-import com.viaexpressa.scannerbarcode.classes.LocationService;
+import com.viaexpressa.scannerbarcode.service.HTTPService;
+import com.viaexpressa.scannerbarcode.service.LocationService;
 import com.viaexpressa.scannerbarcode.classes.Portrait;
 import com.viaexpressa.scannerbarcode.R;
 import com.viaexpressa.scannerbarcode.classes.Usuario;

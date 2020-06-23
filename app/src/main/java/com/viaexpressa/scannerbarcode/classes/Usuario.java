@@ -55,7 +55,7 @@ public class Usuario implements Serializable {
         return idUsuario;
     }
 
-    void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -63,7 +63,7 @@ public class Usuario implements Serializable {
         return nomeUsuario;
     }
 
-    void setNomeUsuario(String nomeUsuario) {
+    public void setNomeUsuario(String nomeUsuario) {
         this.nomeUsuario = nomeUsuario;
     }
 
@@ -71,7 +71,7 @@ public class Usuario implements Serializable {
         return emailUsuario;
     }
 
-    void setEmailUsuario(String emailUsuario) {
+    public void setEmailUsuario(String emailUsuario) {
         this.emailUsuario = emailUsuario;
     }
 
@@ -79,7 +79,7 @@ public class Usuario implements Serializable {
         return nivelUsuario;
     }
 
-    void setNivelUsuario(int nivelUsuario) {
+    public void setNivelUsuario(int nivelUsuario) {
         this.nivelUsuario = nivelUsuario;
     }
 
