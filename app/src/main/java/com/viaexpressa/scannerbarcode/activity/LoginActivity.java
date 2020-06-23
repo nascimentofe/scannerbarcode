@@ -22,7 +22,6 @@ public class LoginActivity extends AppCompatActivity {
     CircularProgressButton progressButton;
     ArrayList<String> lista;
     ImageButton imgBtnExibirSenha;
-    public static final String LOGIN_PREFERENCE = "LOGIN_AUTOMATICO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +36,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        loginAutomatico();
     }
 
-    private void loginAutomatico() {
-        SharedPreferences preferences = getSharedPreferences(LOGIN_PREFERENCE, MODE_PRIVATE);
-        if (preferences.getInt("id",0) > 0){
-            Usuario usuario = new Usuario(
-                    preferences.getInt("id",0),
-                    preferences.getString("apelido", ""),
-                    preferences.getString("senha", ""),
-                    preferences.getString("nome", ""),
-                    preferences.getString("email", ""),
-                    preferences.getString("telefone", ""),
-                    preferences.getInt("nivel", 0),
-                    preferences.getString("tipo", "")
-            );
 
-            HTTPService request = new HTTPService(getApplicationContext());
-            request.checkLogin(usuario, progressButton);
-        }
-    }
 
     private void acoes() {
         progressButton.setOnClickListener(new View.OnClickListener() {

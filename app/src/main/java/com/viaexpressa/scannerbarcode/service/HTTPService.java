@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.viaexpressa.scannerbarcode.R;
+import com.viaexpressa.scannerbarcode.activity.LoginActivity;
 import com.viaexpressa.scannerbarcode.activity.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonArray;
@@ -196,10 +197,9 @@ public class HTTPService {
 
     }
 
-    public void checkLogin(final Usuario usuario, final CircularProgressButton progressButton){
+    public void checkLogin(final Usuario usuario){
 
         final String url = URL + "/checkLogin.php?apelido=" + usuario.getApelidoUsuario() + "&pass=" + usuario.getSenhaUsuario();
-        Toast.makeText(context, "Verificando login...", Toast.LENGTH_LONG).show();
 
         Ion.with(context)
                 .load(url)
@@ -212,8 +212,6 @@ public class HTTPService {
                             i.putExtra("usuario", usuario);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(i);
-                        }else{
-                            Toast.makeText(context, "Faça um novo login!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
